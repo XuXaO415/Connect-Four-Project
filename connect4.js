@@ -5,8 +5,8 @@
  * board fills (tie)
  */
 
-const WIDTH = 7;
-const HEIGHT = 6;
+let WIDTH = 7;
+let HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
@@ -38,11 +38,14 @@ function makeHtmlBoard () {
   // TODO: add comment for this code
   //create table row (tr) element using document.createElement
   const top = document.createElement ('tr');
+  //sets attribute
   top.setAttribute ('id', 'column-top');
   top.addEventListener ('click', handleClick);
 
   for (let x = 0; x < WIDTH; x++) {
+    //create a variable called headCell that references table data (td) element
     const headCell = document.createElement ('td');
+    //if id exists, update it to x else create an id with the value x
     headCell.setAttribute ('id', x);
     top.append (headCell);
   }
@@ -65,19 +68,23 @@ function makeHtmlBoard () {
 
 function findSpotForCol (x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  return null;
+  //return 0;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable (y, x) {
   // TODO: make a div and insert into correct table cell
+  const makeDiv = document.createElement ('div');
+  makeDiv.classList.add ('piece');
 }
 
 /** endGame: announce game end */
 
 function endGame (msg) {
   // TODO: pop up alert message
+  alert ('GAME OVER');
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -94,6 +101,7 @@ function handleClick (evt) {
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
+
   placeInTable (y, x);
 
   // check for win
@@ -103,6 +111,9 @@ function handleClick (evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
+  if (checkForWin ()) {
+    return endGame ('Tie game');
+  }
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2

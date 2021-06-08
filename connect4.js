@@ -125,9 +125,9 @@ function handleClick (evt) {
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
-
-  placeInTable (y, x);
+  //updates board at current index and set to currPlayer
   board[y][x] = currPlayer;
+  placeInTable (y, x);
 
   // check for win
   if (checkForWin ()) {
@@ -137,7 +137,11 @@ function handleClick (evt) {
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
   //using .every() and callback function to check all elements in an array (cells)
-  //and returns a boolean value
+  //and returns a boolean value. Reference this solution from
+  //https://stackoverflow.com/questions/62727756/connect-4-check-for-win-isnt-working-how-do-i-fix
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+  //used checkForWin instead of board.every(row => row.every(Boolean)) because I think it makes sense to check whether each cell
+  //is filled for a win
   if (checkForWin.every (cells => cells.every (Boolean))) {
     console.log (`${cells}`);
     return endGame ('Tie game');

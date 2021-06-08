@@ -12,13 +12,13 @@ const HEIGHT = 6;
 let currPlayer = 1; // active player: 1 or 2
 // board variable is set globally
 let board = []; // array of rows, each row is array of cells  (board[y][x])
-
+const htmlBoard = document.querySelector ('#board');
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard () {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  // Done TODO: set "board" to empty HEIGHT x WIDTH matrix array
   //Setting 'board' to empty height x width creates a 2d array
   //that has a height of 6 rows by a width of 7 columns
   for (let y = 0; y < HEIGHT; y++) {
@@ -40,14 +40,14 @@ function makeBoard () {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard () {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  // DONE TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   //selects board
-  const htmlBoard = document.querySelector ('#board');
-  //console.log (board);
-  // TODO: add comment for this code
-  //create table row (tr) element using document.createElement
-  const top = document.createElement ('tr');
 
+  //console.log (board);
+  // DONE TODO: add comment for this code
+  //creates an HTML table row (tr) element (using document.createElement)
+  const top = document.createElement ('tr');
+  // sets attribute id to column-top
   top.setAttribute ('id', 'column-top');
   // add eventListener & assign a click event handler
   top.addEventListener ('click', handleClick);
@@ -72,7 +72,7 @@ function makeHtmlBoard () {
     //create table row (tr) element for HEIGHT?
     const row = document.createElement ('tr');
     for (let x = 0; x < WIDTH; x++) {
-      //create table data for WIDTH?
+      //create table data for WIDTH and fills it with cell elements/data?
       const cell = document.createElement ('td');
       //A little confused here. Are we setting height(y) and width(x) to id?
       cell.setAttribute ('id', `${y}-${x}`);

@@ -9,6 +9,7 @@ let WIDTH = 7;
 let HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
+// board variable is set globally
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
@@ -19,11 +20,10 @@ function makeBoard () {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   //Setting 'board' to empty height x width creates a 2d array
   //that has a height of 6 rows by a width of 7 columns
-  const board = [];
   for (let y = 0; y < HEIGHT; y++) {
     board[y] = [];
     for (let x = 0; x < WIDTH; x++) {
-      //creates a new array?
+      //creates an empty/undefined array?
       board[y][x] = null;
     }
   }
@@ -42,13 +42,13 @@ function makeHtmlBoard () {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   //selects board
   const htmlBoard = document.querySelector ('#board');
-  console.log (board);
+  //console.log (board);
   // TODO: add comment for this code
   //create table row (tr) element using document.createElement
   const top = document.createElement ('tr');
   //
   top.setAttribute ('id', 'column-top');
-  // add eventListener that listens for handleClick
+  // add eventListener & assign a click event handler
   top.addEventListener ('click', handleClick);
 
   for (let x = 0; x < WIDTH; x++) {
@@ -57,7 +57,7 @@ function makeHtmlBoard () {
     //if id exists, update it to x else create an id with the value x
     headCell.setAttribute ('id', x);
     //top -> tr & headCell -> td
-    // add/nest table row (tr) inside of table data (td)
+    // add table row (tr) on top of headCell
     top.append (headCell);
   }
   //
@@ -75,8 +75,10 @@ function makeHtmlBoard () {
       const cell = document.createElement ('td');
       //A little confused here. Are we setting height(y) and width(x) to id?
       cell.setAttribute ('id', `${y}-${x}`);
+      //row is appended to cell
       row.append (cell);
     }
+    // htmlBoard is appended to row
     htmlBoard.append (row);
   }
 }
@@ -101,6 +103,9 @@ function placeInTable (y, x) {
   // TODO: make a div and insert into correct table cell
   const div = document.createElement ('div');
   div.classList.add ('piece');
+  //div.classList.add ('id', `${y}-${x}]`);
+  // div.classList.add ('column-top', `${y}-${x}]`);
+  //div.appendChild ('#column-top', [y]);
 }
 
 /** endGame: announce game end */
@@ -115,7 +120,8 @@ function endGame (msg) {
 
 function handleClick (evt) {
   // get x from ID of clicked cell
-  let x = +evt.target.id;
+
+  const x = evt.target.id;
 
   // get next spot in column (if none, ignore click)
   let y = findSpotForCol (x);

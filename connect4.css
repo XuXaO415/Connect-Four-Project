@@ -24,18 +24,27 @@ h1 {
 
 .piece {
   /* TODO: make into circles */
-  margin: 5px;
+  margin: auto;
   width: 80%;
   height: 80%;
+  border-radius: 40px;
   animation-duration: 1000ms;
 }
 
-.player1 {
+div.p1 {
+  margin: auto;
+  width: 80%;
+  height: 80%;
+  border-radius: 40px;
   color: red;
-  position: absolutely;
+  
 }
 
-.player2 {
+div.p2 {
+  margin: auto;
+  width: 80%;
+  height: 80%;
+  border-radius: 40px;
   color: rgb(13, 71, 231);
 }
 

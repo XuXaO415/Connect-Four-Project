@@ -89,8 +89,8 @@ function makeHtmlBoard () {
 //x = WIDTH
 function findSpotForCol (x) {
   // TODO: write the real version of this, rather than always returning 0
-  for (let y = 0; y < HEIGHT; y++) {
-    if (board[x] === null) return [y];
+  for (let y = HEIGHT - 1; y > 0; y--) {
+    if (board[y][x] === null) return y;
     //console.log (`this is x at column: ${y}`);
     //console.log ([x]);
     console.log (`this is a move at column: ${x}`);
@@ -105,6 +105,9 @@ function placeInTable (y, x) {
   // TODO: make a div and insert into correct table cell
   const div = document.createElement ('div');
   div.classList.add ('piece');
+  let spot = document.getElementById (`${y}-${x}`);
+  div.classList.add (`p${currPlayer}`);
+  spot.append (div);
   //div.classList.add ('id', `${y}-${x}]`);
   // div.classList.add ('column-top', `${y}-${x}]`);
 }
@@ -123,7 +126,7 @@ function handleClick (evt) {
   // get x from ID of clicked cell
   //row = top -> ID -> tr -> #column-top -> height -> y
   //cell = headCell -> id -> td -> width -> x
-  const x = evt.target.id;
+  const x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
   const y = findSpotForCol (x);
@@ -150,7 +153,7 @@ function handleClick (evt) {
   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
   //used checkForWin instead of board.every(row => row.every(Boolean)) because I think it makes sense to check whether each cell
   //is filled for a win
-  if (checkForWin.every (cells => cells.every (Boolean))) {
+  if (board.every (cells => cells.every (cell => cell))) {
     console.log (`${cells}`);
     return endGame ('Tie game');
   }

@@ -4,8 +4,9 @@
  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
  * board fills (tie)
  */
-
+//WIDTH = x
 const WIDTH = 7;
+//HEIGHT = y
 const HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
@@ -27,7 +28,7 @@ function makeBoard () {
       board[y][x] = null;
     }
   }
-  console.log (board);
+  //console.log (board);
   //console.log (WIDTH, HEIGHT);
 }
 
@@ -46,7 +47,7 @@ function makeHtmlBoard () {
   // TODO: add comment for this code
   //create table row (tr) element using document.createElement
   const top = document.createElement ('tr');
-  //
+
   top.setAttribute ('id', 'column-top');
   // add eventListener & assign a click event handler
   top.addEventListener ('click', handleClick);

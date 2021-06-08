@@ -5,8 +5,8 @@
  * board fills (tie)
  */
 
-let WIDTH = 7;
-let HEIGHT = 6;
+const WIDTH = 7;
+const HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
 // board variable is set globally
@@ -105,7 +105,6 @@ function placeInTable (y, x) {
   div.classList.add ('piece');
   //div.classList.add ('id', `${y}-${x}]`);
   // div.classList.add ('column-top', `${y}-${x}]`);
-  //div.appendChild ('#column-top', [y]);
 }
 
 /** endGame: announce game end */
@@ -120,8 +119,9 @@ function endGame (msg) {
 
 function handleClick (evt) {
   // get x from ID of clicked cell
-
-  const x = evt.target.id;
+  //row = cells = ID -> tr -> #column-top
+  //const x = evt.target.id;
+  const x = document.getElementById ('#column-top');
 
   // get next spot in column (if none, ignore click)
   let y = findSpotForCol (x);

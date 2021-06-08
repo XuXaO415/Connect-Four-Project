@@ -71,6 +71,7 @@ function makeHtmlBoard () {
   for (let y = 0; y < HEIGHT; y++) {
     //create table row (tr) element for HEIGHT?
     const row = document.createElement ('tr');
+
     for (let x = 0; x < WIDTH; x++) {
       //create table data for WIDTH and fills it with cell elements/data?
       const cell = document.createElement ('td');
@@ -111,7 +112,7 @@ function placeInTable (y, x) {
 /** endGame: announce game end */
 
 function endGame (msg) {
-  // TODO: pop up alert message
+  // DONE TODO: pop up alert message
   alert (msg);
   console.log ('game over');
 }
@@ -120,12 +121,12 @@ function endGame (msg) {
 
 function handleClick (evt) {
   // get x from ID of clicked cell
-  //row = cells = ID -> tr -> #column-top
-  //const x = evt.target.id;
-  const x = document.getElementById ('#column-top');
+  //row = top -> ID -> tr -> #column-top -> height -> y
+  //cell = headCell -> id -> td -> width -> x
+  const x = evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  let y = findSpotForCol (x);
+  const y = findSpotForCol (x);
   if (y === null) {
     return;
   }
@@ -161,10 +162,10 @@ function handleClick (evt) {
   //--logic-- currPlayer (condition) is strictly equal to player 1,
   //if currPlayer is 1, currPlayer = 2, else currPlayer = 1
   //let currPlayer = currPlayer === 1 ? 2 : 1;
-  if (currPlayer === '1') {
-    currPlayer = '2';
+  if (currPlayer === 1) {
+    currPlayer = 2;
   } else {
-    currPlayer = '1';
+    currPlayer = 1;
   }
 }
 
@@ -187,14 +188,21 @@ function checkForWin () {
   }
 
   // TODO: read and understand this code. Add comments to help you.
-
+  //row = top -> ID -> tr -> #column-top -> height -> y
+  //loops thru each row element
   for (let y = 0; y < HEIGHT; y++) {
+    //cell = headCell -> id -> td -> width -> x
+    //loops thru each cell element
     for (let x = 0; x < WIDTH; x++) {
+      //horizontal array
       const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
+      //vertical array
       const vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
+      // diagonal right array?
       const diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
+      //diagonal left array
       const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
-
+      //if win is either horizontal or vertical or diagonal right or diagonal left
       if (_win (horiz) || _win (vert) || _win (diagDR) || _win (diagDL)) {
         return true;
       }

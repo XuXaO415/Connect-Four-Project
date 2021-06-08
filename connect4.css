@@ -30,12 +30,12 @@ h1 {
   animation-duration: 1000ms;
 }
 
-.piece.p1 {
+.player1 {
   color: red;
   position: absolutely;
 }
 
-.piece.p2 {
+.player2 {
   color: rgb(13, 71, 231);
 }
 

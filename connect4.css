@@ -35,7 +35,7 @@ div.p1 {
   width: 80%;
   height: 80%;
   border-radius: 40px;
-  color: red;
+  background-color: red;
   
 }
 
@@ -44,7 +44,7 @@ div.p2 {
   width: 80%;
   height: 80%;
   border-radius: 40px;
-  color: rgb(13, 71, 231);
+  background-color: rgb(13, 71, 231);
 }
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */

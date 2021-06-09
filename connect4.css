@@ -1,53 +1,79 @@
+body {
+background: -webkit-linear-gradient(to right, #f44336, #2196f3);  
+background: linear-gradient(to right, #f44336, #2196f3); 
+  /* background: -webkit-linear-gradient(to right, #a80077, #66ff00); 
+  background: linear-gradient(to right, #a80077, #66ff00);  */
+}
 h1 {
   text-align: center;
   font-family: 'Quicksand', sans-serif;
-  margin: 0 auto;
-  padding: 30px;
+  padding: 10px;
+  border: 2px solid lightgrey;
 }
-
+h1 {
+    color:#f2f;
+    -webkit-animation: flash linear 1s infinite;
+    animation: flash linear 1s infinite;
+  }
+  @-webkit-keyframes flash {
+    0% { opacity: 1; } 
+    50% { opacity: .1; } 
+    100% { opacity: 1; }
+  }
+  @keyframes flash {
+    0% { opacity: 1; } 
+    50% { opacity: .1; } 
+    100% { opacity: 1; }
+  }
+ 
 
 
 /* game board table */
 
 #board td {
+ 
+  margin: auto;
   padding: 10px;
-  align-content: center;
-  
+  position: center;
   width: 50px;
   height: 50px;
   border: solid 1px black;
 
+}
+#board {
+  margin: auto;
+  padding: 10px;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
 
 .piece {
   /* TODO: make into circles */
-  margin: auto;
-  width: 80%;
-  height: 80%;
-  border-radius: 40px;
+  
   animation-duration: 1000ms;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 div.p1 {
-  margin: auto;
-  width: 80%;
-  height: 80%;
-  border-radius: 40px;
+ 
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
   background-color: red;
   
 }
 
 div.p2 {
-  margin: auto;
-  width: 80%;
-  height: 80%;
-  border-radius: 40px;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   background-color: rgb(13, 71, 231);
 }
 
-/* TODO: make pieces red/blue,  depending on player 1/2 piece */
+/* DONE TODO: make pieces red/blue,  depending on player 1/2 piece */
 
 /* column-top is table row of clickable areas for each column */
 

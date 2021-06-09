@@ -88,7 +88,8 @@ function makeHtmlBoard () {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 //x = WIDTH
 function findSpotForCol (x) {
-  // TODO: write the real version of this, rather than always returning 0
+  // DONE TODO: write the real version of this, rather than always returning 0
+  //drops piece at bottom of column -- starts at bottom of column
   for (let y = HEIGHT - 1; y > 0; y--) {
     if (board[y][x] === null) return y;
     //console.log (`this is x at column: ${y}`);
@@ -102,7 +103,7 @@ function findSpotForCol (x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable (y, x) {
-  // TODO: make a div and insert into correct table cell
+  // DONE TODO: make a div and insert into correct table cell
   const div = document.createElement ('div');
   div.classList.add ('piece');
   let spot = document.getElementById (`${y}-${x}`);
@@ -135,7 +136,7 @@ function handleClick (evt) {
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
+  // DONE TODO: add line to update in-memory board
   //updates board at current index and set to currPlayer
   board[y][x] = currPlayer;
   placeInTable (y, x);
@@ -146,7 +147,7 @@ function handleClick (evt) {
   }
 
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
+  // DONE TODO: check if all cells in board are filled; if so call, call endGame
   //using .every() and callback function to check all elements in an array (cells)
   //and returns a boolean value. Reference this solution from
   //https://stackoverflow.com/questions/62727756/connect-4-check-for-win-isnt-working-how-do-i-fix
@@ -159,7 +160,7 @@ function handleClick (evt) {
   }
 
   // switch players
-  // TODO: switch currPlayer 1 <-> 2
+  // DONE TODO: switch currPlayer 1 <-> 2
   //instead of using an if statement, I'm using a ternary operator
   //to switch currPlayer; 1 -> 2 and vice versa
   //--logic-- currPlayer (condition) is strictly equal to player 1,
@@ -190,23 +191,24 @@ function checkForWin () {
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
+  //DONE  TODO: read and understand this code. Add comments to help you.
   //row = top -> ID -> tr -> #column-top -> height -> y
   //loops thru each row element
   for (let y = 0; y < HEIGHT; y++) {
     //cell = headCell -> id -> td -> width -> x
     //loops thru each cell element
     for (let x = 0; x < WIDTH; x++) {
-      //horizontal array
+      //horizontal array increments by one as it goes down each row
       const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      //vertical array
+      //vertical array increments by one as it goes down each column
       const vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      // diagonal right array?
+      // diagonal right array increments by 1 as
       const diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
       //diagonal left array
       const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
-      //if win is either horizontal or vertical or diagonal right or diagonal left
+      //checks for win in multiple scenarios; either horizontal or vertical or diagonal right or diagonal left
       if (_win (horiz) || _win (vert) || _win (diagDR) || _win (diagDL)) {
+        // if any of the logical operators || return true
         return true;
       }
     }

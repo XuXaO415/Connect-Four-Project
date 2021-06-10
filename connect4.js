@@ -61,10 +61,10 @@ function makeHtmlBoard () {
     // add table row (tr) on top of headCell
     top.append (headCell);
   }
-  //
+  //appends top of html [game] board
   htmlBoard.append (top);
 
-  // TODO: add comment for this code
+  //DONE TODO: add comment for this code
   //td = table data
   //tr = table row
   //set variable y to initialize  0; if y is less than height; keep iterating until false
@@ -75,7 +75,7 @@ function makeHtmlBoard () {
     for (let x = 0; x < WIDTH; x++) {
       //create table data for WIDTH and fills it with cell elements/data?
       const cell = document.createElement ('td');
-      //A little confused here. Are we setting height(y) and width(x) to id?
+      //Sets id attribute to height(y) and width(x)
       cell.setAttribute ('id', `${y}-${x}`);
       //row is appended to cell
       row.append (cell);
@@ -124,6 +124,12 @@ function endGame (msg) {
 /** handleClick: handle click of column top to play piece */
 
 function handleClick (evt) {
+  //Checks game for win, if one player wins, ends game.
+  if (checkForWin ()) {
+    return endGame (
+      `Game Over. Player ${currPlayer} won. Hit refresh to play again!`
+    );
+  }
   // get x from ID of clicked cell
   //row = top -> ID -> tr -> #column-top -> height -> y
   //cell = headCell -> id -> td -> width -> x
@@ -155,7 +161,7 @@ function handleClick (evt) {
   //used checkForWin instead of board.every(row => row.every(Boolean)) because I think it makes sense to check whether each cell
   //is filled for a win
   if (board.every (cells => cells.every (cell => cell))) {
-    console.log (`${cells}`);
+    //console.log (`${cells}`);
     return endGame ('Tie game');
   }
 
@@ -216,4 +222,4 @@ function checkForWin () {
 }
 
 makeBoard ();
-makeHtmlBoard ();
+makeHtmlBoard (board);

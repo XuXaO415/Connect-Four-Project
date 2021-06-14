@@ -5,14 +5,14 @@
  * board fills (tie)
  */
 //WIDTH = x
-const WIDTH = 7;
+const WIDTH = 7; // WIDTH = td = columns
 //HEIGHT = y
-const HEIGHT = 6;
+const HEIGHT = 6; // HEIGHT = tr = rows
 
 let currPlayer = 1; // active player: 1 or 2
 // board variable is set globally
 let board = []; // array of rows, each row is array of cells  (board[y][x])
-const htmlBoard = document.querySelector ('#board');
+//const htmlBoard = document.querySelector ('#board');
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
@@ -32,18 +32,11 @@ function makeBoard () {
   //console.log (WIDTH, HEIGHT);
 }
 
-/*for(let i = 0; i < HEIGHT; i++) {
-  //creates new array?
-  board[i] = Array(WIDTH).fill(null);
-}*/
-
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard () {
   // DONE TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-  //selects board
-
-  //console.log (board);
+  const htmlBoard = document.querySelector ('#board');
   // DONE TODO: add comment for this code
   //creates an HTML table row (tr) element (using document.createElement)
   const top = document.createElement ('tr');

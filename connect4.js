@@ -12,7 +12,7 @@ const HEIGHT = 6; // HEIGHT = tr = rows
 let currPlayer = 1; // active player: 1 or 2
 // board variable is set globally
 let board = []; // array of rows, each row is array of cells  (board[y][x])
-//const htmlBoard = document.querySelector ('#board');
+
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
@@ -28,8 +28,6 @@ function makeBoard () {
       board[y][x] = null;
     }
   }
-  //console.log (board);
-  //console.log (WIDTH, HEIGHT);
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
@@ -38,15 +36,15 @@ function makeHtmlBoard () {
   // DONE TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.querySelector ('#board');
   // DONE TODO: add comment for this code
-  //creates an HTML table row (tr) element (using document.createElement)
+  //creates an HTML table row (tr) element on top of board
   const top = document.createElement ('tr');
   // sets attribute id to column-top
   top.setAttribute ('id', 'column-top');
-  // add eventListener & assign a click event handler
+  // add eventListener & assign a click event handler to the row
   top.addEventListener ('click', handleClick);
-
+  // width is set to zero, iterate thru columns, add 1 until false
   for (let x = 0; x < WIDTH; x++) {
-    //create a variable called headCell that references table data (td) element
+    //creates a variable called headCell that references table data (td) element
     const headCell = document.createElement ('td');
     //if id exists, update it to x else create an id with the value x
     headCell.setAttribute ('id', x);
@@ -54,39 +52,40 @@ function makeHtmlBoard () {
     // add table row (tr) on top of headCell
     top.append (headCell);
   }
-  //appends top of html [game] board
+
+  //add tr to top of html board
   htmlBoard.append (top);
 
   //DONE TODO: add comment for this code
   //td = table data
   //tr = table row
   //set variable y to initialize  0; if y is less than height; keep iterating until false
+  //set height to zero, iterate thru rows, add one until false
   for (let y = 0; y < HEIGHT; y++) {
     //create table row (tr) element for HEIGHT?
     const row = document.createElement ('tr');
-
+    //set width to zero, iterate thru columns
     for (let x = 0; x < WIDTH; x++) {
       //create table data for WIDTH and fills it with cell elements/data?
       const cell = document.createElement ('td');
+      //Rewrite this explanation!
       //Sets id attribute to height(y) and width(x)
       cell.setAttribute ('id', `${y}-${x}`);
       //row is appended to cell
       row.append (cell);
     }
     // htmlBoard is appended to row
+    //add (tr) row to html board
     htmlBoard.append (row);
   }
 }
 
-/** findSpotForCol: given column x, return top empty y (null if filled) */
-//x = WIDTH
 function findSpotForCol (x) {
   // DONE TODO: write the real version of this, rather than always returning 0
   //drops piece at bottom of column -- starts at bottom of column
   for (let y = HEIGHT - 1; y > 0; y--) {
     if (board[y][x] === null) return y;
     //console.log (`this is x at column: ${y}`);
-    //console.log ([x]);
     console.log (`this is a move at column: ${x}`);
   }
   return null;

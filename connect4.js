@@ -26,7 +26,7 @@ function makeBoard () {
     //board[y] = empty array;
     board[y] = [];
     for (let x = 0; x < WIDTH; x++) {
-      //creates an empty/undefined array?
+      //creates an empty/undefined array
       board[y][x] = null;
     }
   }
@@ -219,5 +219,5 @@ function checkForWin () {
   }
 }
 
-makeBoard ();
+makeBoard (board);
 makeHtmlBoard (board);

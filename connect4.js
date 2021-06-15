@@ -21,7 +21,9 @@ function makeBoard () {
   // Done TODO: set "board" to empty HEIGHT x WIDTH matrix array
   //Setting 'board' to empty height x width creates a 2d array
   //that has a height of 6 rows by a width of 7 columns
+  //set variable y (columns) to zero; y iterates thru columns until false
   for (let y = 0; y < HEIGHT; y++) {
+    //board[y] = empty array;
     board[y] = [];
     for (let x = 0; x < WIDTH; x++) {
       //creates an empty/undefined array?
@@ -40,16 +42,15 @@ function makeHtmlBoard () {
   const top = document.createElement ('tr');
   // sets attribute id to column-top
   top.setAttribute ('id', 'column-top');
-  // add eventListener & assign a click event handler to the row
+  // add eventListener & assigns a click event handler to the row when clicked
   top.addEventListener ('click', handleClick);
-  // width is set to zero, iterate thru columns, add 1 until false
+  // width is set to zero, iterate thru columns (td)
   for (let x = 0; x < WIDTH; x++) {
     //creates a variable called headCell that references table data (td) element
     const headCell = document.createElement ('td');
     //if id exists, update it to x else create an id with the value x
     headCell.setAttribute ('id', x);
-    //top -> tr & headCell -> td
-    // add table row (tr) on top of headCell
+    //adds td to board
     top.append (headCell);
   }
 
@@ -62,19 +63,21 @@ function makeHtmlBoard () {
   //set variable y to initialize  0; if y is less than height; keep iterating until false
   //set height to zero, iterate thru rows, add one until false
   for (let y = 0; y < HEIGHT; y++) {
-    //create table row (tr) element for HEIGHT?
+    //create table row (tr) element for height
     const row = document.createElement ('tr');
+
     //set width to zero, iterate thru columns
     for (let x = 0; x < WIDTH; x++) {
       //create table data for WIDTH and fills it with cell elements/data?
       const cell = document.createElement ('td');
-      //Rewrite this explanation!
-      //Sets id attribute to height(y) and width(x)
+
+      //sets each (cell) td element with an id of y-x
       cell.setAttribute ('id', `${y}-${x}`);
-      //row is appended to cell
+
+      // add cell (td) to row
       row.append (cell);
     }
-    // htmlBoard is appended to row
+
     //add (tr) row to html board
     htmlBoard.append (row);
   }
@@ -83,7 +86,11 @@ function makeHtmlBoard () {
 function findSpotForCol (x) {
   // DONE TODO: write the real version of this, rather than always returning 0
   //drops piece at bottom of column -- starts at bottom of column
+  //y = height - 1 -> last spot in the game board
+  //y > 0 -> keep working from the bottom of game board to top
+  //y-- -> keep decrementing until false; ends loops
   for (let y = HEIGHT - 1; y > 0; y--) {
+    //checks board at [y][x] position to see if null (absence of value); if so, return y
     if (board[y][x] === null) return y;
     //console.log (`this is x at column: ${y}`);
     console.log (`this is a move at column: ${x}`);
@@ -125,6 +132,9 @@ function handleClick (evt) {
   // get x from ID of clicked cell
   //row = top -> ID -> tr -> #column-top -> height -> y
   //cell = headCell -> id -> td -> width -> x
+
+  //create variable for evt
+  //gets x from id of clicked cell
   const x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
@@ -135,7 +145,7 @@ function handleClick (evt) {
 
   // place piece in board and add to HTML table
   // DONE TODO: add line to update in-memory board
-  //updates board at current index and set to currPlayer
+  //updates board at current index and sets it to currPlayer
   board[y][x] = currPlayer;
   placeInTable (y, x);
 
@@ -153,17 +163,12 @@ function handleClick (evt) {
   //used checkForWin instead of board.every(row => row.every(Boolean)) because I think it makes sense to check whether each cell
   //is filled for a win
   if (board.every (cells => cells.every (cell => cell))) {
-    //console.log (`${cells}`);
+    //console.log ('Tie game');
     return endGame ('Tie game');
   }
 
   // switch players
   // DONE TODO: switch currPlayer 1 <-> 2
-  //instead of using an if statement, I'm using a ternary operator
-  //to switch currPlayer; 1 -> 2 and vice versa
-  //--logic-- currPlayer (condition) is strictly equal to player 1,
-  //if currPlayer is 1, currPlayer = 2, else currPlayer = 1
-  //let currPlayer = currPlayer === 1 ? 2 : 1;
   if (currPlayer === 1) {
     currPlayer = 2;
   } else {
@@ -196,6 +201,7 @@ function checkForWin () {
     //cell = headCell -> id -> td -> width -> x
     //loops thru each cell element
     for (let x = 0; x < WIDTH; x++) {
+      // Random thought: The arrays below kind of remind me of a cartesian grid layout
       //horizontal array increments by one as it goes down each row
       const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       //vertical array increments by one as it goes down each column

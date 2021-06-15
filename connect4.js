@@ -11,6 +11,7 @@ const HEIGHT = 6; // HEIGHT = tr = rows
 
 let currPlayer = 1; // active player: 1 or 2
 // board variable is set globally
+//ideally I should have used const to declared the board array variable
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
@@ -23,7 +24,7 @@ function makeBoard () {
   //that has a height of 6 rows by a width of 7 columns
   //set variable y (columns) to zero; y iterates thru columns until false
   for (let y = 0; y < HEIGHT; y++) {
-    //board[y] = empty array;
+    //calling board[y] = empty array;
     board[y] = [];
     for (let x = 0; x < WIDTH; x++) {
       //creates an empty/undefined array
@@ -36,6 +37,7 @@ function makeBoard () {
 
 function makeHtmlBoard () {
   // DONE TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  //Using html DOM query selector to select html id of board
   const htmlBoard = document.querySelector ('#board');
   // DONE TODO: add comment for this code
   //creates an HTML table row (tr) element on top of board
@@ -89,7 +91,8 @@ function findSpotForCol (x) {
   //y = height - 1 -> last spot in the game board
   //y > 0 -> keep working from the bottom of game board to top
   //y-- -> keep decrementing until false; ends loops
-  for (let y = HEIGHT - 1; y > 0; y--) {
+  //changed y > 0; to y >= 0. This was causing the the piece to not show up on index[0] on the game board
+  for (let y = HEIGHT - 1; y >= 0; y--) {
     //checks board at [y][x] position to see if null (absence of value); if so, return y
     if (board[y][x] === null) return y;
     //console.log (`this is x at column: ${y}`);
